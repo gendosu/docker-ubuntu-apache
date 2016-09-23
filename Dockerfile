@@ -36,3 +36,5 @@ RUN mkdir -p /etc/apache/log
 
 RUN a2enmod rewrite
 
+CMD /usr/sbin/apache2 -DFOREGROUND
+
