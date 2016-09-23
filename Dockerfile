@@ -1,4 +1,4 @@
-# ubuntu-base
+# ubuntu-apache
 #
 # VERSION               0.0.1
 
