@@ -2,7 +2,7 @@
 #
 # VERSION               0.0.1
 
-FROM      gendosu/ubuntu-base:latest
+FROM      gendosu/ubuntu-base:12.04.5
 
 MAINTAINER Gen Takahashi <gendosu@gmail.com>
 
@@ -27,8 +27,8 @@ RUN apt-get update \
     vim \
     build-essential \
     apache2 \
-    php \
-    php-mysql \
+    php5 \
+    php5-mysql \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
