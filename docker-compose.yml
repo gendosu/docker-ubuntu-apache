@@ -1,0 +1,50 @@
+version: "2"
+
+services:
+  main:
+    build: .
+
+    environment:
+      APACHE_RUN_USER: "www-data"
+      APACHE_RUN_GROUP: "www-data"
+      APACHE_LOG_DIR: "log"
+
+    links:
+      - "mysql:mysql"
+
+    ports:
+      - "80:80"
+
+    volumes:
+      - ".:/products"
+      - "./wordpress:/var/www/wordpress"
+      - "./log:/etc/apache2/log"
+      - "./apache-conf:/etc/apache2/sites-enabled"
+
+    expose:
+      - "80"
+
+  #
+  # MySQLのコンテナ
+  #
+  # コンテナへのアクセスは
+  # $> docker exec -i -t [コンテナID] /bin/bash
+  #
+  # MySQLへのアクセスは
+  # $> mysql -uroot -p -hmysql
+  #
+  # macからは
+  # $> mysql -uroot -p -hlocal-vm(hostsにlocal-vmを設定した場合)
+  #
+  mysql:
+    image: mysql:5.6
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+
+    volumes:
+      - "./Dockerfiles/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+
+    ports:
+      - "3306:3306"
+
